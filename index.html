@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b3a">
+<title>4b4u — Eaglercraft Anarchy</title>
+<meta name="description" content="4b4u is an Eaglercraft anarchy server. Explore, build, fight, and survive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="posts.js" defer></script>
+<style>
+:root {
+  --navy: #071b3a;
+  --blue: #0b3d91;
+  --bright: #2675f5;
+  --sky: #eaf3ff;
+  --white: #fff;
+  --ink: #10213c;
+  --muted: #65758d;
+  --line: #dce8f7;
+  --surface: #f6f9ff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.6;
+}
+a { color: inherit; }
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  max-width: 1120px; margin: auto; padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.logo { font-size: 25px; font-weight: 900; letter-spacing: -1.5px; color: var(--navy); text-decoration: none; }
+.logo span { color: var(--bright); }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { color: #53647d; text-decoration: none; font-size: 14px; font-weight: 700; transition: color .2s; }
+.nav-links a:hover { color: var(--bright); }
+.nav-links .nav-cta { color: white; background: var(--bright); padding: 10px 17px; border-radius: 12px; }
+.hero {
+  position: relative; overflow: hidden; color: white;
+  background: radial-gradient(ellipse at 80% 20%, #1f67ce 0, transparent 36%),
+              linear-gradient(135deg, #061632 0%, #0b3475 58%, #1254b5 100%);
+  padding: 105px 24px 112px;
+}
+.hero::after {
+  content: ""; position: absolute; width: 420px; height: 420px; border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%; right: -80px; bottom: -260px; box-shadow: 0 0 0 45px rgba(255,255,255,.035), 0 0 0 95px rgba(255,255,255,.025);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 1120px; margin: auto; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px;
+  color: #c9e0ff; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+}
+.eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #7cc4ff; box-shadow: 0 0 14px #7cc4ff; }
+h1 { max-width: 750px; font-size: clamp(52px, 9vw, 92px); line-height: .98; letter-spacing: -5px; font-weight: 900; }
+h1 span { color: #8fc4ff; }
+.hero p { max-width: 570px; margin-top: 25px; color: #d5e5ff; font-size: clamp(16px, 2vw, 19px); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 34px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 13px 21px; border-radius: 12px;
+  text-decoration: none; font-size: 14px; font-weight: 800; border: 1px solid transparent;
+  transition: transform .18s, background .18s, box-shadow .18s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { color: #07306c; background: white; box-shadow: 0 8px 25px rgba(0,0,0,.12); }
+.btn-primary:hover { background: #eaf3ff; }
+.btn-ghost { color: white; border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.07); }
+.btn-ghost:hover { background: rgba(255,255,255,.15); }
+.section { max-width: 1120px; margin: auto; padding: 72px 24px; }
+.section-heading { margin-bottom: 28px; }
+.kicker { color: var(--bright); font-size: 12px; font-weight: 900; letter-spacing: 1.8px; text-transform: uppercase; }
+h2 { color: var(--navy); margin-top: 7px; font-size: clamp(28px, 4vw, 38px); line-height: 1.15; letter-spacing: -1.2px; }
+.subtitle { color: var(--muted); margin-top: 10px; max-width: 650px; }
+.join-card {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 28px; border: 1px solid var(--line); border-radius: 22px;
+  background: white; box-shadow: 0 15px 45px rgba(19,61,118,.06);
+}
+.server-label { color: var(--muted); font-size: 11px; font-weight: 900; letter-spacing: 1.6px; }
+.ip { margin-top: 8px; color: var(--navy); font-size: clamp(19px, 3vw, 26px); font-weight: 800; letter-spacing: -.5px; overflow-wrap: anywhere; }
+.join-note { margin-top: 6px; color: var(--muted); font-size: 13px; }
+.copy-btn { flex-shrink: 0; border: 0; border-radius: 12px; padding: 14px 19px; background: var(--bright); color: white; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.copy-btn:hover { background: var(--blue); }
+.copy-btn:focus-visible, a:focus-visible { outline: 3px solid #83baff; outline-offset: 3px; }
+.status { min-height: 20px; margin-top: 9px; color: #167044; font-size: 13px; font-weight: 700; }
+.news-grid, .feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+.blog-post, .feature {
+  background: white; border: 1px solid var(--line); border-radius: 18px; padding: 25px;
+  box-shadow: 0 10px 30px rgba(19,61,118,.035);
+}
+.blog-post h3, .feature h3 { color: var(--navy); font-size: 18px; line-height: 1.3; }
+.post-meta { margin: 9px 0 13px; color: var(--bright); font-size: 11px; font-weight: 900; letter-spacing: .8px; text-transform: uppercase; }
+.blog-post p, .feature p { color: var(--muted); font-size: 14px; line-height: 1.75; overflow-wrap: anywhere; }
+.feature-icon {
+  display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 18px;
+  border-radius: 13px; color: var(--bright); background: var(--sky); font-size: 20px; font-weight: 900;
+}
+.feature h3 { margin-bottom: 8px; }
+.about-panel {
+  padding: 32px; border-radius: 22px; color: #dceaff;
+  background: linear-gradient(120deg, #0a2450, #0c4aa0);
+}
+.about-panel h2 { color: white; }
+.about-panel p { max-width: 780px; margin-top: 14px; }
+.about-panel .tagline { margin-top: 20px; color: white; font-weight: 800; }
+footer { margin-top: 30px; padding: 27px 24px; background: white; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 12px; }
+footer strong { color: var(--blue); }
+@media (max-width: 650px) {
+  .nav { padding: 13px 17px; flex-wrap: wrap; }
+  .nav-links { width: 100%; justify-content: space-between; gap: 10px; }
+  .nav-links a { font-size: 12px; }
+  .nav-links .nav-cta { padding: 8px 12px; }
+  .hero { padding: 78px 20px 86px; }
+  h1 { letter-spacing: -3px; }
+  .section { padding: 52px 18px; }
+  .join-card { align-items: stretch; flex-direction: column; padding: 22px; }
+  .copy-btn { width: 100%; }
+  .news-grid, .feature-grid { grid-template-columns: 1fr; }
+  .about-panel { padding: 25px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="logo" href="#home" aria-label="4b4u home">4b<span>4u</span></a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#join">Join</a>
+      <a href="#news">News</a>
+      <a href="#about">About</a>
+      <a class="nav-cta" href="#join">Play now ↗</a>
+    </div>
+  </nav>
+</div>
+
+<header class="hero" id="home">
+  <div class="hero-inner">
+    <div class="eyebrow">Eaglercraft anarchy server</div>
+    <h1>Welcome to<br><span>4b4u.</span></h1>
+    <p>A world without claims, protected bases, or limits. Build your legacy, take risks, and see how long you can survive.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#join">Join the server <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="#features">Explore features</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="join">
+    <div class="section-heading">
+      <div class="kicker">Ready to play?</div>
+      <h2>Join the server</h2>
+      <p class="subtitle">Connect using Eaglercraft and start your adventure.</p>
+    </div>
+    <div class="join-card">
+      <div>
+        <div class="server-label">SERVER ADDRESS</div>
+        <div class="ip" id="serverIP">4b4u.eagler.host</div>
+        <p class="join-note">Copy the address and paste it into your server list.</p>
+        <div class="status" id="copyStatus" role="status" aria-live="polite"></div>
+      </div>
+      <button class="copy-btn" id="copyButton" type="button">Copy address</button>
+    </div>
+  </section>
+
+  <section class="section" id="news">
+    <div class="section-heading">
+      <div class="kicker">Server updates</div>
+      <h2>Latest news</h2>
+      <p class="subtitle">Announcements, updates, and information from 4b4u.</p>
+    </div>
+    <div class="news-grid" id="posts" aria-live="polite"></div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="section-heading">
+      <div class="kicker">Make your mark</div>
+      <h2>Built for anarchy</h2>
+      <p class="subtitle">A world where your choices shape your own story.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature"><div class="feature-icon" aria-hidden="true">◇</div><h3>True anarchy</h3><p>No claims and no protected bases. The world is yours to explore.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">⌁</div><h3>Hopper duping</h3><p>Hopper duplication is enabled on the server.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">⚔</div><h3>PvP & raiding</h3><p>Compete with other players and protect what you build.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">▦</div><h3>Build or break</h3><p>Create something legendary—or leave your mark on the landscape.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="about-panel">
+      <div class="kicker" style="color:#9bc9ff">About the server</div>
+      <h2>Survive your own way.</h2>
+      <p>4b4u is an Eaglercraft anarchy server inspired by the classic 2b2t experience. Explore, fight, raid, build, and survive in a world without claims.</p>
+      <p class="tagline">Trust nobody. Survive anything.</p>
+    </div>
+  </section>
+</main>
+
+<footer><p><strong>4b4u</strong> © 2026 · Not affiliated with Mojang or Microsoft.</p></footer>
+
+<script>
+const copyButton = document.getElementById("copyButton");
+copyButton.addEventListener("click", async () => {
+  const ip = document.getElementById("serverIP").textContent.trim();
+  const status = document.getElementById("copyStatus");
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(ip);
+    } else {
+      const field = document.createElement("textarea");
+      field.value = ip;
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      const copied = document.execCommand("copy");
+      field.remove();
+      if (!copied) throw new Error("Copy unavailable");
+    }
+    status.textContent = "Address copied!";
+  } catch {
+    status.textContent = "Copy failed — select the address above and copy it manually.";
+  }
+});
+
+function displayPosts() {
+  const container = document.getElementById("posts");
+  if (!Array.isArray(window.posts) || window.posts.length === 0) {
+    container.textContent = "No announcements yet.";
+    return;
+  }
+  [...window.posts].reverse().forEach(post => {
+    const article = document.createElement("article");
+    article.className = "blog-post";
+    const title = document.createElement("h3");
+    title.textContent = post.title || "Server update";
+    const meta = document.createElement("div");
+    meta.className = "post-meta";
+    meta.textContent = [post.category, post.date].filter(Boolean).join(" · ");
+    const content = document.createElement("p");
+    content.textContent = post.content || "";
+    article.append(title, meta, content);
+    container.appendChild(article);
+  });
+}
+displayPosts();
+</script>
+</body>
+</html>
